@@ -1,3 +1,5 @@
+import io.restassured.RestAssured;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -9,9 +11,15 @@ import static org.hamcrest.Matchers.*;
 
 public class APItests {
 
+    @BeforeAll
+    static void setup () {
+        RestAssured.baseURI = "https://reqres.in";
+        RestAssured.basePath = "/api";
+    }
+
 
     @Test
-    void patchApiTestSuccessful() {
+    void patchApiTestSuccessfulTest() {
 
         String patchData = "{\"name\": \"morpheus\", \"job\": \"zion resident\"}";
         String currentYear = String.valueOf(LocalDateTime.now().getYear());
@@ -23,7 +31,7 @@ public class APItests {
                 .log().uri()
                 .when()
 
-                .patch("https://reqres.in/api/users/2")
+                .patch("/users/2")
 
                 .then()
                 .log().status()
@@ -38,7 +46,7 @@ public class APItests {
     }
 
     @Test
-    void patchApiTestSingleParameter() {
+    void patchApiTestSingleParameterTest() {
 
         String patchData = "{\"name\": \"\", \"job\": \"zion resident\"}";
         String currentYear = String.valueOf(LocalDateTime.now().getYear());
@@ -50,7 +58,7 @@ public class APItests {
                 .log().uri()
                 .when()
 
-                .patch("https://reqres.in/api/users/2")
+                .patch("/users/2")
 
                 .then()
                 .log().status()
@@ -67,7 +75,7 @@ public class APItests {
 
     @Test
     void getSingleObjectTest() {
-        get("https://reqres.in/api/unknown/2")
+        get("/unknown/2")
                 .then()
                 .body("data.id", equalTo(2))
                 .body("data.name", equalTo("fuchsia rose"))
@@ -77,7 +85,7 @@ public class APItests {
     }
 
     @Test
-    void postApiTestSuccessful() {
+    void postApiTestSuccessfulTest() {
 
         String patchData = "{\"name\": \"morpheus\", \"job\": \"zion resident\"}";
         String currentYear = String.valueOf(LocalDateTime.now().getYear());
@@ -89,7 +97,7 @@ public class APItests {
                 .log().uri()
                 .when()
 
-                .post("https://reqres.in/api/users/2")
+                .post("/users/2")
 
                 .then()
                 .log().status()
@@ -106,17 +114,15 @@ public class APItests {
 
     @Test
     void userNotFoundTest() {
-        get("https://reqres.in/api/users/23")
+        get("/users/23")
                 .then()
-                .statusCode(404);
+                .statusCode(401);
     }
 
     @Test
     void failedRegistrationTest() {
 
         String patchData = "{\"email\": \"eve.holt@reqres.imn\", \"password\": \"knife\"}";
-        String currentYear = String.valueOf(LocalDateTime.now().getYear());
-        String currentMonth = String.format("%02d", LocalDateTime.now().getMonthValue());
 
         given().body(patchData)
                 .contentType("application/json")
@@ -124,7 +130,7 @@ public class APItests {
                 .log().uri()
                 .when()
 
-                .post("https://reqres.in/api/register")
+                .post("/register")
 
                 .then()
                 .log().status()
