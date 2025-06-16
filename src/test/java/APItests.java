@@ -75,8 +75,15 @@ public class APItests {
 
     @Test
     void getSingleObjectTest() {
-        get("/unknown/2")
+        given()
+                .header("x-api-key", "reqres-free-v1")
+                .log().uri()
+                .when()
+                .get("/unknown/2")  // Убрана точка с запятой, добавлена точка
                 .then()
+                .log().status()
+                .log().body()
+                .statusCode(200)  // Добавьте проверку статуса
                 .body("data.id", equalTo(2))
                 .body("data.name", equalTo("fuchsia rose"))
                 .body("data.year", equalTo(2001))
@@ -114,9 +121,20 @@ public class APItests {
 
     @Test
     void userNotFoundTest() {
+
+        given()
+                .header("x-api-key", "reqres-free-v1")
+                .log().uri()
+                .when()
+                .get("/users/23")
+                .then()
+                .log().status()
+                .log().body()
+                .statusCode(404);
+
         get("/users/23")
                 .then()
-                .statusCode(401);
+                .statusCode(404);
     }
 
     @Test
