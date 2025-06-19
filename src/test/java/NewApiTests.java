@@ -1,21 +1,24 @@
+import com.codeborne.selenide.logevents.SelenideLogger;
+import helpers.TestBase;
+import io.qameta.allure.*;
+import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import models.lombok.*;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
 import static io.qameta.allure.Allure.step;
-import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static specs.HwGetSingleSpec.*;
 import static specs.HwPatchSpec.patchRequestSpec;
 import static specs.HwPatchSpec.patchResponseSpec;
 import static specs.HwPostLombokSpec.*;
 
-public class NewApiTests {
+public class NewApiTests extends TestBase {
 
     @BeforeAll
     static void setup() {
@@ -23,7 +26,15 @@ public class NewApiTests {
         RestAssured.basePath = "/api";
     }
 
+    @BeforeEach
+    void allureListener() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
 
+    @Feature("Api tests")
+    @Story("reqres")
+    @Owner("belikinA")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     void patchApiTestSuccessfulTest() {
 
@@ -53,6 +64,10 @@ public class NewApiTests {
         });
     }
 
+    @Feature("Api tests")
+    @Story("reqres")
+    @Owner("belikinA")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     void getSingleObjectTest() {
 
@@ -75,6 +90,10 @@ public class NewApiTests {
         });
     }
 
+    @Feature("Api tests")
+    @Story("reqres")
+    @Owner("belikinA")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     void postApiTestSuccessfulTest() {
 
@@ -103,6 +122,10 @@ public class NewApiTests {
         });
     }
 
+    @Feature("Api tests")
+    @Story("reqres")
+    @Owner("belikinA")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     void userNotFoundTest() {
 
@@ -121,7 +144,10 @@ public class NewApiTests {
         });
     }
 
-
+    @Feature("Api tests")
+    @Story("reqres")
+    @Owner("belikinA")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     void patchApiTestSingleParameterTest() {
 
@@ -151,5 +177,4 @@ public class NewApiTests {
             assertTrue(response.getUpdatedAt().contains("T"));
         });
     }
-
 }
