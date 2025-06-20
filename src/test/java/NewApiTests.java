@@ -9,8 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
-
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,15 +38,13 @@ public class NewApiTests extends TestBase {
     @Test
     void patchApiTestSuccessfulTest() {
 
-        HwPatchLombokBodyModel authData = new HwPatchLombokBodyModel();
-
-        String patchData = "{\"name\": \"morpheus\", \"job\": \"zion resident\"}";
-        String currentYear = String.valueOf(LocalDateTime.now().getYear());
-        String currentMonth = String.format("%02d", LocalDateTime.now().getMonthValue());
+        HwPatchLombokBodyModel testData = HwPatchLombokBodyModel.createTestData();
+        String currentYear = HwPatchLombokBodyModel.getCurrentYear();
+        String currentMonth = HwPatchLombokBodyModel.getCurrentMonth();
 
         HwPatchLombokResponseModel response = step("Sent request", () -> {
             return given().spec(patchRequestSpec)
-                    .body(patchData)
+                    .body(testData)
                     .when()
                     .patch("/users/2")
                     .then()
@@ -101,16 +97,14 @@ public class NewApiTests extends TestBase {
     @Test
     void postApiTestSuccessfulTest() {
 
-        HwPostBodyLombokModel authData = new HwPostBodyLombokModel();
-
-        String patchData = "{\"name\": \"morpheus\", \"job\": \"leader\"}";
-        String currentYear = String.valueOf(LocalDateTime.now().getYear());
-        String currentMonth = String.format("%02d", LocalDateTime.now().getMonthValue());
+        HwPostBodyLombokModel testData = HwPostBodyLombokModel.createTestData();
+        String currentYear = HwPostBodyLombokModel.getCurrentYear();
+        String currentMonth = HwPostBodyLombokModel.getCurrentMonth();
 
         HwPostBodyLombokModel response = step("Sent request", () -> {
 
             return given().spec(postRequestSpec)
-                    .body(patchData)
+                    .body(testData)
                     .when()
                     .post("/api/users")
                     .then()
@@ -158,15 +152,13 @@ public class NewApiTests extends TestBase {
     void patchApiTestSingleParameterTest() {
 
 
-        HwPatchLombokBodyModel authData = new HwPatchLombokBodyModel();
-
-        String patchData = "{\"name\": \"\", \"job\": \"zion resident\"}";
-        String currentYear = String.valueOf(LocalDateTime.now().getYear());
-        String currentMonth = String.format("%02d", LocalDateTime.now().getMonthValue());
+        HwPatchSingleLombokBodyModel testData = HwPatchSingleLombokBodyModel.createTestData();
+        String currentYear = HwPatchSingleLombokBodyModel.getCurrentYear();
+        String currentMonth = HwPatchSingleLombokBodyModel.getCurrentMonth();
 
         HwPatchLombokResponseModel response = step("Sent request", () -> {
             return given().spec(patchRequestSpec)
-                    .body(patchData)
+                    .body(testData)
                     .when()
                     .patch("/users/2")
                     .then()

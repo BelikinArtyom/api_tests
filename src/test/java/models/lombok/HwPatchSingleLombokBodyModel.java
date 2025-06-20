@@ -5,18 +5,14 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class HwPostBodyLombokModel {
-
+public class HwPatchSingleLombokBodyModel {
     String name;
     String job;
-    String createdAt;
-    int id;
 
-
-    public static HwPostBodyLombokModel createTestData() {
-        HwPostBodyLombokModel model = new HwPostBodyLombokModel();
-        model.setName("morpheus");
-        model.setJob("leader");
+    public static HwPatchSingleLombokBodyModel createTestData() {
+        HwPatchSingleLombokBodyModel model = new HwPatchSingleLombokBodyModel();
+        model.setName("");
+        model.setJob("zion resident");
         return model;
     }
 
