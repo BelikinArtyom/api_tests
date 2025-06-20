@@ -6,6 +6,7 @@ import io.restassured.RestAssured;
 import models.lombok.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -35,6 +36,7 @@ public class NewApiTests extends TestBase {
     @Story("reqres")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
+    @Tag("WorkWork")
     @Test
     void patchApiTestSuccessfulTest() {
 
@@ -66,6 +68,7 @@ public class NewApiTests extends TestBase {
 
     @Feature("Api tests")
     @Story("reqres")
+    @Tag("WorkWork")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
     @Test
@@ -92,6 +95,7 @@ public class NewApiTests extends TestBase {
 
     @Feature("Api tests")
     @Story("reqres")
+    @Tag("WorkWork")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
     @Test
@@ -124,6 +128,7 @@ public class NewApiTests extends TestBase {
 
     @Feature("Api tests")
     @Story("reqres")
+    @Tag("WorkWork")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
     @Test
@@ -146,6 +151,7 @@ public class NewApiTests extends TestBase {
 
     @Feature("Api tests")
     @Story("reqres")
+    @Tag("WorkWork")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
     @Test
