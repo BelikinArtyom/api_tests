@@ -1,11 +1,7 @@
-import com.codeborne.selenide.logevents.SelenideLogger;
+
 import helpers.TestBase;
 import io.qameta.allure.*;
-import io.qameta.allure.selenide.AllureSelenide;
-import io.restassured.RestAssured;
 import models.lombok.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -19,11 +15,6 @@ import static specs.HwPostLombokSpec.*;
 
 public class NewApiTests extends TestBase {
 
-//    @BeforeEach
-//    void allureListener() {
-//        SelenideLogger.addListener("allure", new AllureSelenide());
-//    }
-
     @Feature("Api tests")
     @Story("reqres")
     @Owner("belikinA")
@@ -32,9 +23,9 @@ public class NewApiTests extends TestBase {
     @Test
     void patchApiTestSuccessfulTest() {
 
-        HwPatchLombokBodyModel testData = HwPatchLombokBodyModel.createTestData();
-        String currentYear = HwPatchLombokBodyModel.getCurrentYear();
-        String currentMonth = HwPatchLombokBodyModel.getCurrentMonth();
+        HwPatchLombokBodyModel testData = HwBodyLombokModel.createPatchData();
+        String currentYear = HwBodyLombokModel.getCurrentYear();
+        String currentMonth = HwBodyLombokModel.getCurrentMonth();
 
         HwPatchLombokResponseModel response = step("Sent request", () -> {
             return given().spec(patchRequestSpec)
@@ -91,9 +82,9 @@ public class NewApiTests extends TestBase {
     @Test
     void postApiTestSuccessfulTest() {
 
-        HwPostBodyLombokModel testData = HwPostBodyLombokModel.createTestData();
-        String currentYear = HwPostBodyLombokModel.getCurrentYear();
-        String currentMonth = HwPostBodyLombokModel.getCurrentMonth();
+        HwPostBodyLombokModel testData = HwBodyLombokModel.createPostData();
+        String currentYear = HwBodyLombokModel.getCurrentYear();
+        String currentMonth = HwBodyLombokModel.getCurrentMonth();
 
         HwPostBodyLombokModel response = step("Sent request", () -> {
 
@@ -146,9 +137,9 @@ public class NewApiTests extends TestBase {
     void patchApiTestSingleParameterTest() {
 
 
-        HwPatchSingleLombokBodyModel testData = HwPatchSingleLombokBodyModel.createTestData();
-        String currentYear = HwPatchSingleLombokBodyModel.getCurrentYear();
-        String currentMonth = HwPatchSingleLombokBodyModel.getCurrentMonth();
+        HwPatchSingleLombokBodyModel testData = HwBodyLombokModel.createTestData();
+        String currentYear = HwBodyLombokModel.getCurrentYear();
+        String currentMonth = HwBodyLombokModel.getCurrentMonth();
 
         HwPatchLombokResponseModel response = step("Sent request", () -> {
             return given().spec(patchRequestSpec)
