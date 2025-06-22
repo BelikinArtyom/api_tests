@@ -8,10 +8,13 @@ import org.junit.jupiter.api.Test;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
-import static specs.HwGetSingleSpec.*;
-import static specs.HwPatchSpec.patchRequestSpec;
-import static specs.HwPatchSpec.patchResponseSpec;
-import static specs.HwPostLombokSpec.*;
+import static specs.HwSpec.getRequestSpec;
+import static specs.HwSpec.getSingleSpec;
+import static specs.HwSpec.patchRequestSpec;
+import static specs.HwSpec.patchResponseSpec;
+import static specs.HwSpec.*;
+import static specs.HwSpec.postResponseSpecNegative;
+
 
 public class NewApiTests extends TestBase {
 
@@ -23,7 +26,7 @@ public class NewApiTests extends TestBase {
     @Test
     void patchApiTestSuccessfulTest() {
 
-        HwPatchLombokBodyModel testData = HwBodyLombokModel.createPatchData();
+        HwBodyLombokModel testData = HwBodyLombokModel.createPatchData();
         String currentYear = HwBodyLombokModel.getCurrentYear();
         String currentMonth = HwBodyLombokModel.getCurrentMonth();
 
@@ -82,11 +85,11 @@ public class NewApiTests extends TestBase {
     @Test
     void postApiTestSuccessfulTest() {
 
-        HwPostBodyLombokModel testData = HwBodyLombokModel.createPostData();
+        HwBodyLombokModel testData = HwBodyLombokModel.createPostData();
         String currentYear = HwBodyLombokModel.getCurrentYear();
         String currentMonth = HwBodyLombokModel.getCurrentMonth();
 
-        HwPostBodyLombokModel response = step("Sent request", () -> {
+        HwBodyLombokModel response = step("Sent request", () -> {
 
             return given().spec(postRequestSpec)
                     .body(testData)
@@ -94,7 +97,7 @@ public class NewApiTests extends TestBase {
                     .post("/api/users")
                     .then()
                     .spec(postResponseSpec)
-                    .extract().as(HwPostBodyLombokModel.class);
+                    .extract().as(HwBodyLombokModel.class);
         });
 
         step("Check response data", () -> {
@@ -137,7 +140,7 @@ public class NewApiTests extends TestBase {
     void patchApiTestSingleParameterTest() {
 
 
-        HwPatchSingleLombokBodyModel testData = HwBodyLombokModel.createTestData();
+        HwBodyLombokModel testData = HwBodyLombokModel.createPatchSingle();
         String currentYear = HwBodyLombokModel.getCurrentYear();
         String currentMonth = HwBodyLombokModel.getCurrentMonth();
 

@@ -10,4 +10,8 @@ public class HwPatchLombokResponseModel {
     String job;
 
     String updatedAt;
+
+    String createdAt;
+
+    int id;
 }
