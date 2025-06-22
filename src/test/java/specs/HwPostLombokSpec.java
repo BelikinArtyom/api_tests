@@ -19,9 +19,9 @@ public class HwPostLombokSpec {
             .log().uri()
             .log().body()
             .log().headers()
-            .contentType(JSON)
-            .baseUri("https://reqres.in")
-            .basePath("api/login");
+            .contentType(JSON);
+//            .baseUri("https://reqres.in")
+//            .basePath("api/login");
 
     public static ResponseSpecification postResponseSpec = new ResponseSpecBuilder()
             .expectStatusCode(201)

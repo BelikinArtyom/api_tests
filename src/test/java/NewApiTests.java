@@ -19,16 +19,10 @@ import static specs.HwPostLombokSpec.*;
 
 public class NewApiTests extends TestBase {
 
-    @BeforeAll
-    static void setup() {
-        RestAssured.baseURI = "https://reqres.in";
-        RestAssured.basePath = "/api";
-    }
-
-    @BeforeEach
-    void allureListener() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-    }
+//    @BeforeEach
+//    void allureListener() {
+//        SelenideLogger.addListener("allure", new AllureSelenide());
+//    }
 
     @Feature("Api tests")
     @Story("reqres")
