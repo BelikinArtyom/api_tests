@@ -18,10 +18,37 @@ public class DemoQaLoginSpec {
             .log().headers()
             .contentType(JSON);
 
-
     public static ResponseSpecification bookLoginResponseSpec = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .log(ALL)
             .build();
+
+    public static RequestSpecification bookAddRequestSpec = with()
+            .filter(withCustomTemplates())
+            .log().uri()
+            .log().body()
+            .log().headers()
+            .contentType(JSON);
+
+    public static ResponseSpecification bookAddResponseSpec = new ResponseSpecBuilder()
+            .expectStatusCode(201)
+            .log(ALL)
+            .build();
+
+    public static RequestSpecification bookDeleteRequestSpec = with()
+            .filter(withCustomTemplates())
+            .log().uri()
+            .log().body()
+            .log().headers()
+            .contentType(JSON);
+
+
+    public static ResponseSpecification bookDeleteResponseSpec = new ResponseSpecBuilder()
+            .expectStatusCode(201)
+            .log(ALL)
+            .build();
+
 }
+
+
 
