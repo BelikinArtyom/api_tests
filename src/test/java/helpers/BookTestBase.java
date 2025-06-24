@@ -9,14 +9,14 @@ import org.junit.jupiter.api.BeforeAll;
 
 import static com.codeborne.selenide.Configuration.baseUrl;
 
-public class TestBase {
+public class BookTestBase {
 
     @BeforeAll
     public static void beforeAll() {
 
         String login = "qa@qa.guru",
                 password = "qa@qa.guru1";
-                baseUrl = "https://demoqa.com/";
+        baseUrl = "https://demoqa.com/";
         RestAssured.baseURI = "https://demoqa.com";
 
 
@@ -25,6 +25,6 @@ public class TestBase {
 //            System.getProperty("selenoid_password", "1234"),
 //            System.getProperty("selenoid_host", "selenoid.autotests.cloud"));
 
-            SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        }
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+    }
 }
