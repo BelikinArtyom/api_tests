@@ -14,7 +14,7 @@ public class TestBase {
     @BeforeAll
     public static void beforeAll() {
 
-        String login = "qa@qa.guru",
+         String login = "qa@qa.guru",
                 password = "qa@qa.guru1";
                 baseUrl = "https://demoqa.com/";
         RestAssured.baseURI = "https://demoqa.com";

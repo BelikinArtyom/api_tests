@@ -9,8 +9,6 @@ public class DemoQaBodyModel {
     String userName;
     String password;
 
-    String authData = "{\"userName\":\"" + userName + "\",\"password\":\"" + password + "\"}";
-
     public static DemoQaBodyModel createTestData() {
         DemoQaBodyModel model = new DemoQaBodyModel();
         model.setUserName("Mestray");

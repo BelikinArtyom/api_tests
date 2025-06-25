@@ -28,7 +28,7 @@ public class DemoQaLoginSpec {
             .log().uri()
             .log().body()
             .log().headers()
-            .contentType(JSON);
+            .contentType("application/json");
 
     public static ResponseSpecification bookAddResponseSpec = new ResponseSpecBuilder()
             .expectStatusCode(201)
@@ -44,7 +44,7 @@ public class DemoQaLoginSpec {
 
 
     public static ResponseSpecification bookDeleteResponseSpec = new ResponseSpecBuilder()
-            .expectStatusCode(201)
+            .expectStatusCode(204)
             .log(ALL)
             .build();
 
