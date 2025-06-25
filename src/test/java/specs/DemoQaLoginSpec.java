@@ -48,6 +48,18 @@ public class DemoQaLoginSpec {
             .log(ALL)
             .build();
 
+
+    public static RequestSpecification bookCheckRequestSpec = with()
+            .filter(withCustomTemplates())
+            .log().uri()
+            .log().body()
+            .log().headers()
+            .contentType(JSON);
+
+    public static ResponseSpecification bookCheckResponseSpec = new ResponseSpecBuilder()
+            .expectStatusCode(200)
+            .log(ALL)
+            .build();
 }
 
 
