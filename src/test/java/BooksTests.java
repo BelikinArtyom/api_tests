@@ -1,10 +1,9 @@
-import helpers.AuthContext;
 import helpers.WithLoginExtension;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import models.lombok.AddDeleteBodyModel;
 import models.lombok.DemoQaBodyModel;
-import models.lombok.WithLogin;
+import helpers.WithLogin;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

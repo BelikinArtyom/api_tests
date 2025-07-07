@@ -1,7 +1,6 @@
 package helpers;
 
 import models.lombok.DemoQaBodyModel;
-import models.lombok.WithLogin;
 import org.junit.jupiter.api.extension.*;
 import io.restassured.response.Response;
 
@@ -12,21 +11,17 @@ import static specs.DemoQaLoginSpec.bookLoginResponseSpec;
 public class WithLoginExtension implements BeforeEachCallback, AfterEachCallback {
 
     @Override
-    public void beforeEach(ExtensionContext context) throws Exception {
+    public void beforeEach(ExtensionContext context) {
         WithLogin annotation = context.getRequiredTestMethod().getAnnotation(WithLogin.class);
-
-
 
         if (annotation != null) {
             String username = annotation.username();
             String password = annotation.password();
 
-            // создаём модель и подставляем логин/пароль
             DemoQaBodyModel credentials = DemoQaBodyModel.createTestData();
             credentials.setUserName(username);
             credentials.setPassword(password);
 
-            // Выполняем API логин
             Response loginResponse = given()
                     .spec(bookLoginRequestSpec)
                     .body(credentials)
@@ -45,7 +40,7 @@ public class WithLoginExtension implements BeforeEachCallback, AfterEachCallback
     }
 
     @Override
-    public void afterEach(ExtensionContext context) throws Exception {
+    public void afterEach(ExtensionContext context) {
         AuthContext.clear();
     }
 }

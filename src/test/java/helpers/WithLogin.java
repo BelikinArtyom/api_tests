@@ -1,4 +1,4 @@
-package models.lombok;
+package helpers;
 
 public @interface WithLogin {
 

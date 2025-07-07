@@ -2,13 +2,11 @@ package models.lombok;
 
 import lombok.Data;
 
-
 @Data
 public class DemoQaBodyModel {
 
     String userName;
     String password;
-
 
     public static DemoQaBodyModel createTestData() {
         DemoQaBodyModel model = new DemoQaBodyModel();

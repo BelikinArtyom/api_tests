@@ -20,14 +20,12 @@ public class AddDeleteBodyModel {
 
     List<IsbnModel> collectionOfIsbns;
 
-
     public static AddDeleteBodyModel DeleteBookData() {
         AddDeleteBodyModel model = new AddDeleteBodyModel();
         model.setUserId("0614ae60-ffda-4fe0-88a2-092b2da53b15");
         model.setIsbn("9781449337711");
         return model;
     }
-
 
     public static AddDeleteBodyModel addBook() {
         AddDeleteBodyModel model = new AddDeleteBodyModel();

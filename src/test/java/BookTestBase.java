@@ -20,7 +20,6 @@ public class BookTestBase {
         baseUrl = "https://demoqa.com/";
         RestAssured.baseURI = "https://demoqa.com";
 
-
             Configuration.remote = String.format("https://%s:%s@%s/wd/hub",
             System.getProperty("selenoid_login", "user1"),
             System.getProperty("selenoid_password", "1234"),
