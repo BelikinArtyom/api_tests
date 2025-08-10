@@ -7,12 +7,7 @@ import org.junit.jupiter.api.Test;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
-import static specs.HwSpec.getRequestSpec;
-import static specs.HwSpec.getSingleSpec;
-import static specs.HwSpec.patchRequestSpec;
-import static specs.HwSpec.patchResponseSpec;
 import static specs.HwSpec.*;
-import static specs.HwSpec.postResponseSpecNegative;
 
 
 public class NewApiTests extends TestBase {
@@ -160,6 +155,113 @@ public class NewApiTests extends TestBase {
             assertTrue(response.getUpdatedAt().startsWith(currentYear + "-" + currentMonth));
             assertTrue(response.getUpdatedAt().endsWith("Z"));
             assertTrue(response.getUpdatedAt().contains("T"));
+        });
+    }
+
+
+
+    @Feature("Api tests")
+    @Story("reqres")
+    @Tag("WorkWork")
+    @Owner("belikinA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test
+    void successfulRegisterTest() {
+
+        RegisterRequestModel testData = RegisterRequestModel.createSuccessfulRegisterData();
+
+        RegisterResponseModel response = step("Sent register request", () -> {
+            return given().spec(registerRequestSpec)
+                    .body(testData)
+                    .when()
+                    .post("/api/register")
+                    .then()
+                    .spec(registerResponseSpec)
+                    .statusCode(201)
+                    .extract().as(RegisterResponseModel.class);
+        });
+
+        step("Check register response", () -> {
+
+            assertNotNull(response.getId(), "User ID should not be null");
+            assertFalse(response.getId().isEmpty(), "User ID should not be empty");
+            assertNotNull(response.getEmail(), "Email should not be null");
+            assertFalse(response.getEmail().isEmpty(), "Email should not be empty");
+            assertNotNull(response.getCreatedAt(), "CreatedAt should not be null");
+            assertFalse(response.getCreatedAt().isEmpty(), "CreatedAt should not be empty");
+            assertNull(response.getError(), "Error should be null for successful registration");
+        });
+    }
+
+    @Feature("Api tests")
+    @Story("reqres")
+    @Tag("WorkWork")
+    @Owner("belikinA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test
+    void successfulLoginTest() {
+
+        LoginRequestModel testData = LoginRequestModel.createSuccessfulLoginData();
+
+        LoginResponseModel response = step("Sent login request", () -> {
+            return given().spec(loginRequestSpec)
+                    .body(testData)
+                    .when()
+                    .post("/api/login")
+                    .then()
+                    .spec(loginResponseSpec)
+                    .extract().as(LoginResponseModel.class);
+        });
+
+        step("Check login response", () -> {
+            assertNotNull(response.getId(), "ID should not be null");
+            assertFalse(response.getId().isEmpty(), "ID should not be empty");
+            assertNotNull(response.getEmail(), "Email should not be null");
+            assertFalse(response.getEmail().isEmpty(), "Email should not be empty");
+            assertNotNull(response.getPassword(), "Password should not be null");
+            assertFalse(response.getPassword().isEmpty(), "Password should not be empty");
+            assertNotNull(response.getCreatedAt(), "CreatedAt should not be null");
+            assertFalse(response.getCreatedAt().isEmpty(), "CreatedAt should not be empty");
+            assertNull(response.getError(), "Error should be null for successful login");
+        });
+    }
+
+    @Feature("Api tests")
+    @Story("reqres")
+    @Tag("WorkWork")
+    @Owner("belikinA")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test
+    void getUserListWithPaginationTest() {
+
+        int pageNumber = 2;
+
+        UserListResponseModel response = step("Sent request for user list", () -> {
+            return given().spec(getRequestSpec)
+                    .queryParam("page", pageNumber)
+                    .when()
+                    .get("/users")
+                    .then()
+                    .spec(getSingleSpec)
+                    .extract().as(UserListResponseModel.class);
+        });
+
+        step("Check pagination response", () -> {
+            assertEquals(pageNumber, response.getPage(), "Page should be 2");
+            assertEquals(6, response.getPer_page(), "Per page should be 6");
+            assertTrue(response.getTotal() > 0, "Total should be greater than 0");
+            assertTrue(response.getTotal_pages() > 0, "Total pages should be greater than 0");
+            assertNotNull(response.getData(), "Data should not be null");
+            assertFalse(response.getData().isEmpty(), "Data should not be empty");
+            assertNotNull(response.getSupport(), "Support should not be null");
+            
+            // Проверяем первого пользователя на странице
+            UserModel firstUser = response.getData().get(0);
+            assertTrue(firstUser.getId() > 0, "User ID should be positive");
+            assertNotNull(firstUser.getEmail(), "User email should not be null");
+            assertNotNull(firstUser.getFirst_name(), "User first name should not be null");
+            assertNotNull(firstUser.getLast_name(), "User last name should not be null");
+            assertNotNull(firstUser.getAvatar(), "User avatar should not be null");
         });
     }
 }

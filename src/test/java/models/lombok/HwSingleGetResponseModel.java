@@ -8,9 +8,3 @@ public class HwSingleGetResponseModel {
     private SupportModel support;
 }
 
-@Data
- class SupportModel {
-    private String url;
-    private String text;
-}
-

@@ -31,15 +31,11 @@ public class APItests {
         given().body(patchData)
                 .contentType("application/json")
                 .header("x-api-key", API_KEY)
-                .log().uri()
                 .when()
 
                 .patch("/users/2")
 
                 .then()
-                .log().status()
-                .log().body()
-
                 .body("name", is("morpheus"))
                 .body("job", is("zion resident"))
                 .body("updatedAt", notNullValue())
@@ -58,15 +54,11 @@ public class APItests {
         given().body(patchData)
                 .contentType("application/json")
                 .header("x-api-key", API_KEY)
-                .log().uri()
                 .when()
 
                 .patch("/users/2")
 
                 .then()
-                .log().status()
-                .log().body()
-
                 .statusCode(200)
                 .body("name", is(""))
                 .body("job", is("zion resident"))
@@ -80,12 +72,9 @@ public class APItests {
     void getSingleObjectTest() {
         given()
                 .header("x-api-key", API_KEY)
-                .log().uri()
                 .when()
                 .get("/unknown/2")  // Убрана точка с запятой, добавлена точка
                 .then()
-                .log().status()
-                .log().body()
                 .statusCode(200)  // Добавьте проверку статуса
                 .body("data.id", equalTo(2))
                 .body("data.name", equalTo("fuchsia rose"))
@@ -104,15 +93,11 @@ public class APItests {
         given().body(patchData)
                 .contentType("application/json")
                 .header("x-api-key", API_KEY)
-                .log().uri()
                 .when()
 
                 .post("/users/2")
 
                 .then()
-                .log().status()
-                .log().body()
-
                 .body("name", is("morpheus"))
                 .body("job", is("zion resident"))
                 .body("createdAt", notNullValue())
@@ -127,12 +112,9 @@ public class APItests {
 
         given()
                 .header("x-api-key", API_KEY)
-                .log().uri()
                 .when()
                 .get("/users/23")
                 .then()
-                .log().status()
-                .log().body()
                 .statusCode(404);
 
         get("/users/23")
@@ -148,14 +130,11 @@ public class APItests {
         given().body(patchData)
                 .contentType("application/json")
                 .header("x-api-key", API_KEY)
-                .log().uri()
                 .when()
 
                 .post("/register")
 
                 .then()
-                .log().status()
-                .log().body()
                 .body("error", is("Note: Only defined users succeed registration"));
 
     }
