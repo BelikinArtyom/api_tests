@@ -17,7 +17,7 @@ public class ReqresApiTests extends ApiTestBase {
     @Story("reqres")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
-    @Tag("Auto run")
+    @Tag("AutoRun")
     @DisplayName("PATCH: Обновление имени и должности пользователя")
     @Test
     void updateUserJobAndNameTest() {
@@ -57,7 +57,7 @@ public class ReqresApiTests extends ApiTestBase {
 
     @Feature("Api tests")
     @Story("reqres")
-    @Tag("Auto run")
+    @Tag("AutoRun")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("GET: Получение объекта цвета с детальной информацией")
@@ -100,7 +100,7 @@ public class ReqresApiTests extends ApiTestBase {
 
     @Feature("Api tests")
     @Story("reqres")
-    @Tag("Auto run")
+    @Tag("AutoRun")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("POST: Создание нового пользователя")
@@ -140,7 +140,7 @@ public class ReqresApiTests extends ApiTestBase {
 
     @Feature("Api tests")
     @Story("reqres")
-    @Tag("Auto run")
+    @Tag("AutoRun")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("GET: Обработка несуществующего пользователя")
@@ -167,7 +167,7 @@ public class ReqresApiTests extends ApiTestBase {
 
     @Feature("Api tests")
     @Story("reqres")
-    @Tag("Auto run")
+    @Tag("AutoRun")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("PATCH: Частичное обновление пользователя (только должность)")
@@ -209,7 +209,7 @@ public class ReqresApiTests extends ApiTestBase {
 
     @Feature("Api tests")
     @Story("reqres")
-    @Tag("Auto run")
+    @Tag("AutoRun")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("POST: Регистрация нового пользователя")
@@ -252,7 +252,7 @@ public class ReqresApiTests extends ApiTestBase {
 
     @Feature("Api tests")
     @Story("reqres")
-    @Tag("Auto run")
+    @Tag("AutoRun")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("POST: Успешный вход пользователя в систему")
@@ -303,7 +303,7 @@ public class ReqresApiTests extends ApiTestBase {
 
     @Feature("Api tests")
     @Story("reqres")
-    @Tag("Auto run")
+    @Tag("AutoRun")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("GET: Получение списка пользователей с пагинацией")
