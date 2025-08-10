@@ -127,19 +127,13 @@ clean ${TASK}
 ## 📊 Allure-отчет
 
 ### Главная страница Allure-отчета
-<!-- Вставьте скриншот главной страницы Allure-отчета -->
-<img src="images/screens/allure1.png.png" width="800" alt="Allure Main Page">
+<img src="images/screens/allure1.png" width="800" alt="Allure Main Page">
 
 ### Пример отчета о выполнении тестов
-<!-- Вставьте скриншот с результатами выполнения тестов -->
-<img src="images/screens/allure2" width="800" alt="Allure Test Results">
+<img src="images/screens/allure2.png" width="800" alt="Allure Test Results">
 
-### Графики и статистика
-<!-- Вставьте скриншот с графиками выполнения тестов -->
-<img src="images/screens/allure_report_charts.png" width="800" alt="Allure Charts">
-
-<!-- Вставьте скриншот с дополнительной статистикой -->
-<img src="images/screens/allure_report_statistics.png" width="800" alt="Allure Statistics">
+### Запуск из Jenkins
+<img src="images/screens/jenk1.png" width="800" alt="Allure Test Results">
 
 ---
 
