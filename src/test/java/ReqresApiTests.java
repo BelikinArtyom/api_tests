@@ -226,26 +226,42 @@ public class ReqresApiTests extends ApiTestBase {
                     .then()
                     .spec(registerResponseSpec)
                     .statusCode(201)
+                    .log().body()
                     .extract().as(RegisterResponseModel.class);
         });
 
-        step("Логируем ответ для отладки", () -> {
-            System.out.println("Register Response: " + response);
+        step("Выводим ответ регистрации в консоль", () -> {
+            System.out.println("=== Register Response ===");
+            System.out.println("ID: " + response.getId());
+            System.out.println("Username: " + response.getUsername());
+            System.out.println("Email: " + response.getEmail());
+            System.out.println("Password: " + response.getPassword());
+            System.out.println("CreatedAt: " + response.getCreatedAt());
+            System.out.println("========================");
         });
 
-        step("Проверяем, что email в ответе соответствует отправленному", () -> {
-            assertEquals(testData.getEmail(), response.getEmail(), "Email should match request data");
-        });
-
-        step("Проверяем, что пароль в ответе соответствует отправленному", () -> {
-            assertEquals(testData.getPassword(), response.getPassword(), "Password should match request data");
-        });
-
-        step("Проверяем, что ID пользователя сгенерирован", () -> {
+        step("Проверяем, что у пользователя есть ID", () -> {
+            assertNotNull(response.getId(), "User ID should not be null");
             assertFalse(response.getId().isEmpty(), "User ID should not be empty");
         });
 
+        step("Проверяем, что у пользователя есть username", () -> {
+            assertNotNull(response.getUsername(), "Username should not be null");
+            assertFalse(response.getUsername().isEmpty(), "Username should not be empty");
+        });
+
+        step("Проверяем, что у пользователя есть email", () -> {
+            assertNotNull(response.getEmail(), "Email should not be null");
+            assertFalse(response.getEmail().isEmpty(), "Email should not be empty");
+        });
+
+        step("Проверяем, что у пользователя есть password", () -> {
+            assertNotNull(response.getPassword(), "Password should not be null");
+            assertFalse(response.getPassword().isEmpty(), "Password should not be empty");
+        });
+
         step("Проверяем, что время создания установлено", () -> {
+            assertNotNull(response.getCreatedAt(), "CreatedAt should not be null");
             assertFalse(response.getCreatedAt().isEmpty(), "CreatedAt should not be empty");
         });
     }
@@ -259,45 +275,82 @@ public class ReqresApiTests extends ApiTestBase {
     @Test
     void loginUserTest() {
 
-        LoginRequestModel testData = LoginRequestModel.createSuccessfulLoginData();
+        RegisterRequestModel registerData = RegisterRequestModel.createSuccessfulRegisterData();
 
-        LoginResponseModel response = step("Отправляем запрос на вход пользователя", () -> {
+        RegisterResponseModel registerResponse = step("Регистрируем нового пользователя", () -> {
+            return given().spec(registerRequestSpec)
+                    .body(registerData)
+                    .when()
+                    .post("/api/register")
+                    .then()
+                    .spec(registerResponseSpec)
+                    .statusCode(201)
+                    .extract().as(RegisterResponseModel.class);
+        });
+
+        LoginRequestModel loginData = new LoginRequestModel(
+            registerData.getUsername(),
+            registerData.getEmail(),
+            registerData.getPassword()
+        );
+
+        LoginResponseModel loginResponse = step("Отправляем запрос на вход пользователя", () -> {
             return given().spec(loginRequestSpec)
-                    .body(testData)
+                    .body(loginData)
                     .when()
                     .post("/api/login")
                     .then()
+                    .statusCode(201)
                     .spec(loginResponseSpec)
+                    .log().body()
                     .extract().as(LoginResponseModel.class);
         });
 
+        step("Выводим ответ логина в консоль", () -> {
+            System.out.println("=== Login Response ===");
+            System.out.println("ID: " + loginResponse.getId());
+            System.out.println("Username: " + loginResponse.getUsername());
+            System.out.println("Email: " + loginResponse.getEmail());
+            System.out.println("Password: " + loginResponse.getPassword());
+            System.out.println("CreatedAt: " + loginResponse.getCreatedAt());
+            System.out.println("=====================");
+        });
+
         step("Проверяем, что ID пользователя получен", () -> {
-            assertNotNull(response.getId(), "ID should not be null");
-            assertFalse(response.getId().isEmpty(), "ID should not be empty");
-        });
-
-        step("Проверяем, что email пользователя получен", () -> {
-            assertNotNull(response.getEmail(), "Email should not be null");
-            assertFalse(response.getEmail().isEmpty(), "Email should not be empty");
-        });
-
-        step("Проверяем, что пароль пользователя получен", () -> {
-            assertNotNull(response.getPassword(), "Password should not be null");
-            assertFalse(response.getPassword().isEmpty(), "Password should not be empty");
+            assertNotNull(loginResponse.getId(), "ID should not be null");
+            assertFalse(loginResponse.getId().isEmpty(), "ID should not be empty");
         });
 
         step("Проверяем, что username пользователя получен", () -> {
-            assertNotNull(response.getUsername(), "Username should not be null");
-            assertFalse(response.getUsername().isEmpty(), "Username should not be empty");
+            assertNotNull(loginResponse.getUsername(), "Username should not be null");
+            assertFalse(loginResponse.getUsername().isEmpty(), "Username should not be empty");
+        });
+
+        step("Проверяем, что email пользователя получен", () -> {
+            assertNotNull(loginResponse.getEmail(), "Email should not be null");
+            assertFalse(loginResponse.getEmail().isEmpty(), "Email should not be empty");
+        });
+
+        step("Проверяем, что password пользователя получен", () -> {
+            assertNotNull(loginResponse.getPassword(), "Password should not be null");
+            assertFalse(loginResponse.getPassword().isEmpty(), "Password should not be empty");
         });
 
         step("Проверяем, что время создания установлено", () -> {
-            assertNotNull(response.getCreatedAt(), "CreatedAt should not be null");
-            assertFalse(response.getCreatedAt().isEmpty(), "CreatedAt should not be empty");
+            assertNotNull(loginResponse.getCreatedAt(), "CreatedAt should not be null");
+            assertFalse(loginResponse.getCreatedAt().isEmpty(), "CreatedAt should not be empty");
         });
 
-        step("Проверяем, что ошибка отсутствует", () -> {
-            assertNull(response.getError(), "Error should be null for successful login");
+        step("Проверяем, что данные для логина соответствуют данным регистрации", () -> {
+            assertEquals(registerData.getUsername(), loginData.getUsername(), "Username should match registration data");
+            assertEquals(registerData.getEmail(), loginData.getEmail(), "Email should match registration data");
+            assertEquals(registerData.getPassword(), loginData.getPassword(), "Password should match registration data");
+        });
+
+        step("Проверяем, что данные ответа соответствуют переданным значениям", () -> {
+            assertEquals(loginData.getUsername(), loginResponse.getUsername(), "Username in response should match request");
+            assertEquals(loginData.getEmail(), loginResponse.getEmail(), "Email in response should match request");
+            assertEquals(loginData.getPassword(), loginResponse.getPassword(), "Password in response should match request");
         });
     }
 

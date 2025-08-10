@@ -1,17 +1,28 @@
 package models;
 
+import com.github.javafaker.Faker;
 import lombok.Data;
 
 @Data
-public class RegisterRequestModel extends AuthRequestModel {
+public class RegisterRequestModel {
+    private String username;
+    private String email;
+    private String password;
     
+    public RegisterRequestModel() {}
     
-    public RegisterRequestModel(String email, String password) {
-        super(email, password);
+    public RegisterRequestModel(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
     
     public static RegisterRequestModel createSuccessfulRegisterData() {
-        return new RegisterRequestModel("eve.holt@reqres.in", "pistol");
+        Faker faker = new Faker();
+        return new RegisterRequestModel(
+            faker.name().username(),
+            faker.internet().emailAddress(),
+            faker.internet().password(8, 16)
+        );
     }
-    
 }

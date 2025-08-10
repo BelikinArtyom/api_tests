@@ -1,10 +1,14 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
-public class LoginResponseModel extends ApiResponseModel {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class LoginResponseModel {
+    private String id;
+    private String username;
     private String email;
     private String password;
-    private String username;
+    private String createdAt;
 }
