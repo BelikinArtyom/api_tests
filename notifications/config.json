@@ -3,9 +3,9 @@
     "project": "TeleNotifTest",
     "environment": "dev",
     "comment": "test comment",
-    "reportLink": "https://jenkins.autotests.cloud/job/belikinA_cv_Job_work/allure/",
+    "reportLink": "https://jenkins.autotests.cloud/job/Abelikin_api_diploma/7",
     "language": "en",
-    "allureFolder": "C:\\Users\\Bilop\\AppData\\Local\\Temp\\9989200815495292025\\allure-report",
+    "allureFolder": "allure-report",
     "enableChart": true,
     "enableSuitesPublishing": true,
     "customData": {}
