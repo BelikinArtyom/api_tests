@@ -6,11 +6,16 @@ import org.junit.jupiter.api.BeforeAll;
 
 public class TestBase {
 
+    // API ключи из переменных окружения
+    protected static final String API_KEY = System.getProperty("api.key", "reqres-free-v1");
+    protected static final String BASE_URI = System.getProperty("base.uri", "https://reqres.in");
+    protected static final String BASE_PATH = System.getProperty("base.path", "/api");
+
     @BeforeAll
     public static void beforeAll() {
 
-        RestAssured.baseURI = "https://reqres.in";
-        RestAssured.basePath = "/api";
+        RestAssured.baseURI = BASE_URI;
+        RestAssured.basePath = BASE_PATH;
 
 //    Configuration.remote = String.format("https://%s:%s@%s/wd/hub",
 //            System.getProperty("selenoid_login", "user1"),

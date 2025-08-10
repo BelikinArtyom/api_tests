@@ -4,6 +4,7 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
+
 import static helpers.CustomAllureListener.withCustomTemplates;
 import static io.restassured.RestAssured.with;
 import static io.restassured.filter.log.LogDetail.*;
@@ -11,16 +12,19 @@ import static io.restassured.http.ContentType.JSON;
 
 public class HwSpec {
 
+    // Получение API ключа из переменных окружения
+    private static final String API_KEY = System.getProperty("api.key", "reqres-free-v1");
+
     public static RequestSpecification getRequestSpec = with()
             .filter(withCustomTemplates())
             .contentType("application/json")
-            .header("x-api-key", "reqres-free-v1")
+            .header("x-api-key", API_KEY)
             .log().all();
 
     public static RequestSpecification requestWithBodySpec = with()
             .filter(withCustomTemplates())
             .contentType(JSON)
-            .header("x-api-key", "reqres-free-v1")
+            .header("x-api-key", API_KEY)
             .log().all();
 
     public static RequestSpecification postRequestSpec = requestWithBodySpec;

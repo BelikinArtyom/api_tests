@@ -11,10 +11,13 @@ import static org.hamcrest.Matchers.*;
 
 public class APItests {
 
+    // Получение API ключа из переменных окружения
+    private static final String API_KEY = System.getProperty("api.key", "reqres-free-v1");
+
     @BeforeAll
     static void setup () {
-        RestAssured.baseURI = "https://reqres.in";
-        RestAssured.basePath = "/api";
+        RestAssured.baseURI = System.getProperty("base.uri", "https://reqres.in");
+        RestAssured.basePath = System.getProperty("base.path", "/api");
     }
 
 
@@ -27,7 +30,7 @@ public class APItests {
 
         given().body(patchData)
                 .contentType("application/json")
-                .header("x-api-key", "reqres-free-v1")
+                .header("x-api-key", API_KEY)
                 .log().uri()
                 .when()
 
@@ -54,7 +57,7 @@ public class APItests {
 
         given().body(patchData)
                 .contentType("application/json")
-                .header("x-api-key", "reqres-free-v1")
+                .header("x-api-key", API_KEY)
                 .log().uri()
                 .when()
 
@@ -76,7 +79,7 @@ public class APItests {
     @Test
     void getSingleObjectTest() {
         given()
-                .header("x-api-key", "reqres-free-v1")
+                .header("x-api-key", API_KEY)
                 .log().uri()
                 .when()
                 .get("/unknown/2")  // Убрана точка с запятой, добавлена точка
@@ -100,7 +103,7 @@ public class APItests {
 
         given().body(patchData)
                 .contentType("application/json")
-                .header("x-api-key", "reqres-free-v1")
+                .header("x-api-key", API_KEY)
                 .log().uri()
                 .when()
 
@@ -123,7 +126,7 @@ public class APItests {
     void userNotFoundTest() {
 
         given()
-                .header("x-api-key", "reqres-free-v1")
+                .header("x-api-key", API_KEY)
                 .log().uri()
                 .when()
                 .get("/users/23")
@@ -144,7 +147,7 @@ public class APItests {
 
         given().body(patchData)
                 .contentType("application/json")
-                .header("x-api-key", "reqres-free-v1")
+                .header("x-api-key", API_KEY)
                 .log().uri()
                 .when()
 
