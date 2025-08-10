@@ -94,7 +94,47 @@ public class ReqresApiTests extends ApiTestBase {
         });
 
         step("Проверяем корректность Pantone значения", () -> {
-            assertEquals("17-2031", response.getData().getPantoneValue(), "Pantone значение должно быть '17-2031'");
+            assertEquals("17-2031", response.getData().getPantoneValue());
+        });
+    }
+
+    @Feature("Api tests")
+    @Story("reqres")
+    @Tag("AutoRun")
+    @Owner("belikinA")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("POST: Создание нового пользователя")
+    @Test
+    void createNewUserTest() {
+
+        RequestBodyModel testData = RequestBodyModel.createPostData();
+        String currentYear = RequestBodyModel.getCurrentYear();
+        String currentMonth = RequestBodyModel.getCurrentMonth();
+
+        RequestBodyModel response = step("Отправляем запрос на создание нового пользователя", () -> {
+            return given().spec(postRequestSpec)
+                    .body(testData)
+                    .when()
+                    .post("/api/users")
+                    .then()
+                    .spec(postResponseSpec)
+                    .extract().as(RequestBodyModel.class);
+        });
+
+        step("Проверяем, что имя пользователя создано корректно", () -> {
+            assertEquals("morpheus", response.getName());
+        });
+
+        step("Проверяем, что должность пользователя создана корректно", () -> {
+            assertEquals("leader", response.getJob());
+        });
+
+        step("Проверяем, что время создания установлено", () -> {
+            assertNotNull(response.getCreatedAt());
+        });
+
+        step("Проверяем формат времени создания", () -> {
+            assertTrue(response.getCreatedAt().startsWith(currentYear + "-" + currentMonth));
         });
     }
 
@@ -253,28 +293,28 @@ public class ReqresApiTests extends ApiTestBase {
         });
 
         step("Проверяем, что ID пользователя получен", () -> {
-            assertNotNull(loginResponse.getId(), "ID пользователя не должен быть null");
-            assertFalse(loginResponse.getId().isEmpty(), "ID пользователя не должен быть пустым");
+            assertNotNull(loginResponse.getId(), "ID should not be null");
+            assertFalse(loginResponse.getId().isEmpty(), "ID should not be empty");
         });
 
         step("Проверяем, что username пользователя получен", () -> {
-            assertNotNull(loginResponse.getUsername(), "Username не должен быть null");
-            assertFalse(loginResponse.getUsername().isEmpty(), "Username не должен быть пустым");
+            assertNotNull(loginResponse.getUsername(), "Username should not be null");
+            assertFalse(loginResponse.getUsername().isEmpty(), "Username should not be empty");
         });
 
         step("Проверяем, что email пользователя получен", () -> {
-            assertNotNull(loginResponse.getEmail(), "Email не должен быть null");
-            assertFalse(loginResponse.getEmail().isEmpty(), "Email не должен быть пустым");
+            assertNotNull(loginResponse.getEmail(), "Email should not be null");
+            assertFalse(loginResponse.getEmail().isEmpty(), "Email should not be empty");
         });
 
         step("Проверяем, что password пользователя получен", () -> {
-            assertNotNull(loginResponse.getPassword(), "Password не должен быть null");
-            assertFalse(loginResponse.getPassword().isEmpty(), "Password не должен быть пустым");
+            assertNotNull(loginResponse.getPassword(), "Password should not be null");
+            assertFalse(loginResponse.getPassword().isEmpty(), "Password should not be empty");
         });
 
         step("Проверяем, что время создания установлено", () -> {
-            assertNotNull(loginResponse.getCreatedAt(), "Время создания не должно быть null");
-            assertFalse(loginResponse.getCreatedAt().isEmpty(), "Время создания не должно быть пустым");
+            assertNotNull(loginResponse.getCreatedAt(), "CreatedAt should not be null");
+            assertFalse(loginResponse.getCreatedAt().isEmpty(), "CreatedAt should not be empty");
         });
 
         step("Проверяем, что данные для логина соответствуют данным регистрации", () -> {
