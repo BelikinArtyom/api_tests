@@ -16,7 +16,5 @@ public class LoginRequestModel {
         this.password = password;
     }
     
-    public static LoginRequestModel createSuccessfulLoginData() {
-        return new LoginRequestModel("eve.holt", "eve.holt@reqres.in", "pistol");
-    }
+
 }

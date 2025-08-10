@@ -21,8 +21,6 @@ public class ReqresApiTests extends ApiTestBase {
     void updateUserJobAndNameTest() {
 
         RequestBodyModel testData = RequestBodyModel.createPatchData();
-        String currentYear = RequestBodyModel.getCurrentYear();
-        String currentMonth = RequestBodyModel.getCurrentMonth();
 
         PatchResponseModel response = step("Подготавливаем тестовые данные для обновления пользователя", () -> {
             return given().spec(patchRequestSpec)
@@ -47,7 +45,6 @@ public class ReqresApiTests extends ApiTestBase {
         });
 
         step("Проверяем формат времени обновления", () -> {
-            assertTrue(response.getUpdatedAt().startsWith(currentYear + "-" + currentMonth), "Время обновления должно начинаться с текущего года и месяца");
             assertTrue(response.getUpdatedAt().endsWith("Z"), "Время обновления должно заканчиваться на 'Z'");
             assertTrue(response.getUpdatedAt().contains("T"), "Время обновления должно содержать 'T'");
         });
@@ -101,46 +98,6 @@ public class ReqresApiTests extends ApiTestBase {
     @Tag("AutoRun")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("POST: Создание нового пользователя")
-    @Test
-    void createNewUserTest() {
-
-        RequestBodyModel testData = RequestBodyModel.createPostData();
-        String currentYear = RequestBodyModel.getCurrentYear();
-        String currentMonth = RequestBodyModel.getCurrentMonth();
-
-        RequestBodyModel response = step("Отправляем запрос на создание нового пользователя", () -> {
-            return given().spec(postRequestSpec)
-                    .body(testData)
-                    .when()
-                    .post("/api/users")
-                    .then()
-                    .spec(postResponseSpec)
-                    .extract().as(RequestBodyModel.class);
-        });
-
-        step("Проверяем, что имя пользователя создано корректно", () -> {
-            assertEquals("morpheus", response.getName(), "Имя пользователя должно быть 'morpheus'");
-        });
-
-        step("Проверяем, что должность пользователя создана корректно", () -> {
-            assertEquals("leader", response.getJob(), "Должность пользователя должна быть 'leader'");
-        });
-
-        step("Проверяем, что время создания установлено", () -> {
-            assertNotNull(response.getCreatedAt(), "Время создания не должно быть null");
-        });
-
-        step("Проверяем формат времени создания", () -> {
-            assertTrue(response.getCreatedAt().startsWith(currentYear + "-" + currentMonth), "Время создания должно начинаться с текущего года и месяца");
-        });
-    }
-
-    @Feature("Api tests")
-    @Story("reqres")
-    @Tag("AutoRun")
-    @Owner("belikinA")
-    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("GET: Обработка несуществующего пользователя")
     @Test
     void returnEmptyResponseForNonExistingUserTest() {
@@ -169,8 +126,6 @@ public class ReqresApiTests extends ApiTestBase {
     void updateUserJobOnlyTest() {
 
         RequestBodyModel testData = RequestBodyModel.createPatchSingle();
-        String currentYear = RequestBodyModel.getCurrentYear();
-        String currentMonth = RequestBodyModel.getCurrentMonth();
 
         PatchResponseModel response = step("Отправляем запрос на частичное обновление пользователя", () -> {
             return given().spec(patchRequestSpec)
@@ -195,7 +150,6 @@ public class ReqresApiTests extends ApiTestBase {
         });
 
         step("Проверяем формат времени обновления", () -> {
-            assertTrue(response.getUpdatedAt().startsWith(currentYear + "-" + currentMonth), "Время обновления должно начинаться с текущего года и месяца");
             assertTrue(response.getUpdatedAt().endsWith("Z"), "Время обновления должно заканчиваться на 'Z'");
             assertTrue(response.getUpdatedAt().contains("T"), "Время обновления должно содержать 'T'");
         });

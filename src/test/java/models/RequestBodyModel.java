@@ -2,8 +2,6 @@ package models;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 public class RequestBodyModel {
     private String name;
@@ -40,11 +38,5 @@ public class RequestBodyModel {
         return model;
     }
 
-    public static String getCurrentYear() {
-        return String.valueOf(LocalDateTime.now().getYear());
-    }
 
-    public static String getCurrentMonth() {
-        return String.format("%02d", LocalDateTime.now().getMonthValue());
-    }
 }
