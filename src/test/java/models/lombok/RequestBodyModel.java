@@ -5,7 +5,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
     @Data
-    public class HwBodyLombokModel {
+    public class RequestBodyModel {
         String name;
         String job;
         String createdAt;
@@ -13,40 +13,40 @@ import java.time.LocalDateTime;
         int id;
 
         // Конструктор по умолчанию
-        public HwBodyLombokModel() {}
+        public RequestBodyModel() {}
 
         // Конструктор с параметрами для удобства
-        public HwBodyLombokModel(String name, String job) {
+        public RequestBodyModel(String name, String job) {
             this.name = name;
             this.job = job;
         }
 
         // Статический метод для создания данных для PATCH запроса
-        public static HwBodyLombokModel createPatchData() {
-            HwBodyLombokModel model = new HwBodyLombokModel();
+        public static RequestBodyModel createPatchData() {
+            RequestBodyModel model = new RequestBodyModel();
             model.setName("morpheus");
             model.setJob("zion resident");
             return model;
         }
 
-        public static HwBodyLombokModel createPatchSingle() {
-            HwBodyLombokModel model = new HwBodyLombokModel();
+        public static RequestBodyModel createPatchSingle() {
+            RequestBodyModel model = new RequestBodyModel();
             model.setName("");
             model.setJob("zion resident");
             return model;
         }
 
         // Статический метод для создания данных для POST запроса
-        public static HwBodyLombokModel createPostData() {
-            HwBodyLombokModel model = new HwBodyLombokModel();
+        public static RequestBodyModel createPostData() {
+            RequestBodyModel model = new RequestBodyModel();
             model.setName("morpheus");
             model.setJob("leader");
             return model;
         }
 
 
-        public static HwBodyLombokModel createCustomData(String name, String job) {
-            return new HwBodyLombokModel(name, job);
+        public static RequestBodyModel createCustomData(String name, String job) {
+            return new RequestBodyModel(name, job);
         }
 
 

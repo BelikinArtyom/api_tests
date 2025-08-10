@@ -3,8 +3,7 @@ package models.lombok;
 import lombok.Data;
 
 @Data
-public class HwSingleGetResponseModel {
+public class SingleGetResponseModel {
     private DataModel data;
     private SupportModel support;
 }
-

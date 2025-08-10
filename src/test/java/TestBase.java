@@ -17,10 +17,10 @@ public class TestBase {
         RestAssured.baseURI = BASE_URI;
         RestAssured.basePath = BASE_PATH;
 
-//    Configuration.remote = String.format("https://%s:%s@%s/wd/hub",
-//            System.getProperty("selenoid_login", "user1"),
-//            System.getProperty("selenoid_password", "1234"),
-//            System.getProperty("selenoid_host", "selenoid.autotests.cloud"));
+    Configuration.remote = String.format("https://%s:%s@%s/wd/hub",
+            System.getProperty("selenoid_login", "user1"),
+            System.getProperty("selenoid_password", "1234"),
+            System.getProperty("selenoid_host", "selenoid.autotests.cloud"));
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 }

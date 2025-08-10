@@ -10,7 +10,7 @@ import static helpers.CustomAllureListener.withCustomTemplates;
 import static io.restassured.RestAssured.with;
 import static io.restassured.filter.log.LogDetail.*;
 
-public class HwSpec {
+public class ApiSpec {
 
     // Получение API ключа из переменных окружения
     private static final String API_KEY = System.getProperty("api.key", "reqres-free-v1");

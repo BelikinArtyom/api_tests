@@ -5,12 +5,9 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RegisterResponseModel {
-    private String id;
+public class RegisterResponseModel extends ApiResponseModel {
     private String email;
     private String password;
-    private String createdAt;
-    private String error;
     
     // Конструктор по умолчанию
     public RegisterResponseModel() {}

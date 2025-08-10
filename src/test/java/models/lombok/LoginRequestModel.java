@@ -3,18 +3,16 @@ package models.lombok;
 import lombok.Data;
 
 @Data
-public class LoginRequestModel {
-    private String email;
-    private String password;
-    private String uername;
+public class LoginRequestModel extends AuthRequestModel {
+    private String username;
     
     // Конструктор по умолчанию
     public LoginRequestModel() {}
     
     // Конструктор с параметрами
     public LoginRequestModel(String email, String password, String username) {
-        this.email = email;
-        this.password = password;
+        super(email, password);
+        this.username = username;
     }
     
     // Статический метод для создания данных для успешной авторизации

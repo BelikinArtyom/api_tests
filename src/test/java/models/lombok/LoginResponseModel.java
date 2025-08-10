@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LoginResponseModel {
+public class LoginResponseModel extends ApiResponseModel {
     private String email;
     private String password;
-    private String id;
-    private String createdAt;
-    private String error;
 }
