@@ -141,9 +141,8 @@ clean ${TASK}
 
 ### После завершения сборки, бот автоматически отправляет сообщение с результатом выполнения тестов
 
-<!-- Вставьте скриншот уведомления из Telegram -->
 <p align="center">
-<img src="images/screens/telegram_notification.png" width="600" alt="Telegram Notification">
+<img src="images/screens/tg.png" width="600" alt="Telegram Notification">
 </p>
 
 ---
