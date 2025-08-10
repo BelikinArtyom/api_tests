@@ -61,8 +61,8 @@ tasks.withType(Test) {
         }
     }
 }
-task cv_job_tests(type: Test) {
+task auto_tests_custom_run(type: Test) {
     useJUnitPlatform {
-        includeTags("WorkWork")
+        includeTags("Auto run")
     }
 }
