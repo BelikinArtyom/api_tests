@@ -94,7 +94,7 @@ public class ReqresApiTests extends ApiTestBase {
         });
 
         step("Проверяем корректность Pantone значения", () -> {
-            assertEquals("17-2031", response.getData().getPantoneValue());
+            assertEquals("17-2031", response.getData().getPantoneValue(), "Pantone значение должно быть '17-2031'");
         });
     }
 
@@ -122,19 +122,19 @@ public class ReqresApiTests extends ApiTestBase {
         });
 
         step("Проверяем, что имя пользователя создано корректно", () -> {
-            assertEquals("morpheus", response.getName());
+            assertEquals("morpheus", response.getName(), "Имя пользователя должно быть 'morpheus'");
         });
 
         step("Проверяем, что должность пользователя создана корректно", () -> {
-            assertEquals("leader", response.getJob());
+            assertEquals("leader", response.getJob(), "Должность пользователя должна быть 'leader'");
         });
 
         step("Проверяем, что время создания установлено", () -> {
-            assertNotNull(response.getCreatedAt());
+            assertNotNull(response.getCreatedAt(), "Время создания не должно быть null");
         });
 
         step("Проверяем формат времени создания", () -> {
-            assertTrue(response.getCreatedAt().startsWith(currentYear + "-" + currentMonth));
+            assertTrue(response.getCreatedAt().startsWith(currentYear + "-" + currentMonth), "Время создания должно начинаться с текущего года и месяца");
         });
     }
 
@@ -252,6 +252,14 @@ public class ReqresApiTests extends ApiTestBase {
         });
     }
 
+    private LoginRequestModel createLoginDataFromRegisterData(RegisterRequestModel registerData) {
+        return new LoginRequestModel(
+            registerData.getUsername(),
+            registerData.getEmail(),
+            registerData.getPassword()
+        );
+    }
+
     @Feature("Api tests")
     @Story("reqres")
     @Tag("AutoRun")
@@ -274,11 +282,7 @@ public class ReqresApiTests extends ApiTestBase {
                     .extract().as(RegisterResponseModel.class);
         });
 
-        LoginRequestModel loginData = new LoginRequestModel(
-            registerData.getUsername(),
-            registerData.getEmail(),
-            registerData.getPassword()
-        );
+        LoginRequestModel loginData = createLoginDataFromRegisterData(registerData);
 
         LoginResponseModel loginResponse = step("Отправляем запрос на вход пользователя", () -> {
             return given().spec(loginRequestSpec)
@@ -293,28 +297,28 @@ public class ReqresApiTests extends ApiTestBase {
         });
 
         step("Проверяем, что ID пользователя получен", () -> {
-            assertNotNull(loginResponse.getId(), "ID should not be null");
-            assertFalse(loginResponse.getId().isEmpty(), "ID should not be empty");
+            assertNotNull(loginResponse.getId(), "ID пользователя не должен быть null");
+            assertFalse(loginResponse.getId().isEmpty(), "ID пользователя не должен быть пустым");
         });
 
         step("Проверяем, что username пользователя получен", () -> {
-            assertNotNull(loginResponse.getUsername(), "Username should not be null");
-            assertFalse(loginResponse.getUsername().isEmpty(), "Username should not be empty");
+            assertNotNull(loginResponse.getUsername(), "Username не должен быть null");
+            assertFalse(loginResponse.getUsername().isEmpty(), "Username не должен быть пустым");
         });
 
         step("Проверяем, что email пользователя получен", () -> {
-            assertNotNull(loginResponse.getEmail(), "Email should not be null");
-            assertFalse(loginResponse.getEmail().isEmpty(), "Email should not be empty");
+            assertNotNull(loginResponse.getEmail(), "Email не должен быть null");
+            assertFalse(loginResponse.getEmail().isEmpty(), "Email не должен быть пустым");
         });
 
         step("Проверяем, что password пользователя получен", () -> {
-            assertNotNull(loginResponse.getPassword(), "Password should not be null");
-            assertFalse(loginResponse.getPassword().isEmpty(), "Password should not be empty");
+            assertNotNull(loginResponse.getPassword(), "Password не должен быть null");
+            assertFalse(loginResponse.getPassword().isEmpty(), "Password не должен быть пустым");
         });
 
         step("Проверяем, что время создания установлено", () -> {
-            assertNotNull(loginResponse.getCreatedAt(), "CreatedAt should not be null");
-            assertFalse(loginResponse.getCreatedAt().isEmpty(), "CreatedAt should not be empty");
+            assertNotNull(loginResponse.getCreatedAt(), "Время создания не должно быть null");
+            assertFalse(loginResponse.getCreatedAt().isEmpty(), "Время создания не должно быть пустым");
         });
 
         step("Проверяем, что данные для логина соответствуют данным регистрации", () -> {
