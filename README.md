@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://reqres.in/" target="_blank">
-    <img src="images/screens/reqres_in_logo.png" width="200" alt="Reqres.in Logo">
+    <img src="images/logos/reqres_in_logo.png" width="200" alt="Reqres.in Logo">
   </a>
 </p>
 
@@ -98,7 +98,7 @@
 - ✅ **PATCH** - Обновление имени и должности пользователя
 
 ### Особенности реализации
-- Использование **Page Object Model** для моделей данных
+- Использование **Lombok object model** для моделей данных
 - Детальное логирование каждого шага теста через **Allure Steps**
 - Валидация JSON-схем через **Rest-Assured**
 - Автоматическая генерация тестовых данных
