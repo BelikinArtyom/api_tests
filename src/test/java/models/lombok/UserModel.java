@@ -11,7 +11,4 @@ public class UserModel {
     private String first_name;
     private String last_name;
     private String avatar;
-    
-    // Конструктор по умолчанию
-    public UserModel() {}
 }

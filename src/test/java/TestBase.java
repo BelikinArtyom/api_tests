@@ -3,13 +3,17 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 public class TestBase {
-
-    // API ключи из переменных окружения
-    protected static final String API_KEY = System.getProperty("api.key", "reqres-free-v1");
+    
     protected static final String BASE_URI = System.getProperty("base.uri", "https://reqres.in");
     protected static final String BASE_PATH = System.getProperty("base.path", "/api");
+    
+    @BeforeEach
+    void allureListener() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
 
     @BeforeAll
     public static void beforeAll() {

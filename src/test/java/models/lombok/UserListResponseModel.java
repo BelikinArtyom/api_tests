@@ -15,9 +15,6 @@ public class UserListResponseModel {
     private int total_pages;
     private List<UserModel> data;
     private SupportModel support;
-    
-    // Конструктор по умолчанию
-    public UserListResponseModel() {}
 }
 
 

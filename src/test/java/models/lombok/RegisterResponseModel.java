@@ -8,20 +8,4 @@ import lombok.Data;
 public class RegisterResponseModel extends ApiResponseModel {
     private String email;
     private String password;
-    
-    // Конструктор по умолчанию
-    public RegisterResponseModel() {}
-    
-    // Конструктор для успешной регистрации
-    public RegisterResponseModel(String id, String email, String password, String createdAt) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.createdAt = createdAt;
-    }
-    
-    // Конструктор для ошибки
-    public RegisterResponseModel(String error) {
-        this.error = error;
-    }
 }
