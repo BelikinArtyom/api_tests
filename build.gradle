@@ -61,7 +61,7 @@ tasks.withType(Test) {
         }
     }
 }
-task auto_tests_custom_run(type: Test) {
+tasks.register('auto_tests_custom_run', Test) {
     useJUnitPlatform {
         includeTags("Auto run")
     }
