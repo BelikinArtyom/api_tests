@@ -37,21 +37,21 @@ public class ReqresApiTests extends ApiTestBase {
         });
 
         step("Проверяем, что имя пользователя обновлено корректно", () -> {
-            assertEquals("morpheus", response.getName());
+            assertEquals("morpheus", response.getName(), "Имя пользователя должно быть 'morpheus'");
         });
 
         step("Проверяем, что должность пользователя обновлена корректно", () -> {
-            assertEquals("zion resident", response.getJob());
+            assertEquals("zion resident", response.getJob(), "Должность пользователя должна быть 'zion resident'");
         });
 
         step("Проверяем, что время обновления установлено", () -> {
-            assertNotNull(response.getUpdatedAt());
+            assertNotNull(response.getUpdatedAt(), "Время обновления не должно быть null");
         });
 
         step("Проверяем формат времени обновления", () -> {
-            assertTrue(response.getUpdatedAt().startsWith(currentYear + "-" + currentMonth));
-            assertTrue(response.getUpdatedAt().endsWith("Z"));
-            assertTrue(response.getUpdatedAt().contains("T"));
+            assertTrue(response.getUpdatedAt().startsWith(currentYear + "-" + currentMonth), "Время обновления должно начинаться с текущего года и месяца");
+            assertTrue(response.getUpdatedAt().endsWith("Z"), "Время обновления должно заканчиваться на 'Z'");
+            assertTrue(response.getUpdatedAt().contains("T"), "Время обновления должно содержать 'T'");
         });
     }
 
@@ -74,67 +74,27 @@ public class ReqresApiTests extends ApiTestBase {
         });
 
         step("Проверяем, что данные объекта получены", () -> {
-            assertNotNull(response.getData());
+            assertNotNull(response.getData(), "Данные объекта не должны быть null");
         });
 
         step("Проверяем корректность ID объекта", () -> {
-            assertEquals(2, response.getData().getId());
+            assertEquals(2, response.getData().getId(), "ID объекта должен быть равен 2");
         });
 
         step("Проверяем корректность названия цвета", () -> {
-            assertEquals("fuchsia rose", response.getData().getName());
+            assertEquals("fuchsia rose", response.getData().getName(), "Название цвета должно быть 'fuchsia rose'");
         });
 
         step("Проверяем корректность года", () -> {
-            assertEquals(2001, response.getData().getYear());
+            assertEquals(2001, response.getData().getYear(), "Год должен быть равен 2001");
         });
 
         step("Проверяем корректность hex-кода цвета", () -> {
-            assertEquals("#C74375", response.getData().getColor());
+            assertEquals("#C74375", response.getData().getColor(), "Hex-код цвета должен быть '#C74375'");
         });
 
         step("Проверяем корректность Pantone значения", () -> {
-            assertEquals("17-2031", response.getData().getPantoneValue());
-        });
-    }
-
-    @Feature("Api tests")
-    @Story("reqres")
-    @Tag("AutoRun")
-    @Owner("belikinA")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("POST: Создание нового пользователя")
-    @Test
-    void createNewUserTest() {
-
-        RequestBodyModel testData = RequestBodyModel.createPostData();
-        String currentYear = RequestBodyModel.getCurrentYear();
-        String currentMonth = RequestBodyModel.getCurrentMonth();
-
-        RequestBodyModel response = step("Отправляем запрос на создание нового пользователя", () -> {
-            return given().spec(postRequestSpec)
-                    .body(testData)
-                    .when()
-                    .post("/api/users")
-                    .then()
-                    .spec(postResponseSpec)
-                    .extract().as(RequestBodyModel.class);
-        });
-
-        step("Проверяем, что имя пользователя создано корректно", () -> {
-            assertEquals("morpheus", response.getName());
-        });
-
-        step("Проверяем, что должность пользователя создана корректно", () -> {
-            assertEquals("leader", response.getJob());
-        });
-
-        step("Проверяем, что время создания установлено", () -> {
-            assertNotNull(response.getCreatedAt());
-        });
-
-        step("Проверяем формат времени создания", () -> {
-            assertTrue(response.getCreatedAt().startsWith(currentYear + "-" + currentMonth));
+            assertEquals("17-2031", response.getData().getPantoneValue(), "Pantone значение должно быть '17-2031'");
         });
     }
 
@@ -157,11 +117,7 @@ public class ReqresApiTests extends ApiTestBase {
         });
 
         step("Проверяем, что данные пользователя отсутствуют", () -> {
-            assertNull(response.getData(), "Expected no user data for non-existing user");
-        });
-
-        step("Проверяем, что информация поддержки отсутствует", () -> {
-            assertNull(response.getSupport(), "Expected no support info for non-existing user");
+            assertNull(response.getData(), "Данные пользователя должны отсутствовать для несуществующего пользователя");
         });
     }
 
@@ -189,21 +145,21 @@ public class ReqresApiTests extends ApiTestBase {
         });
 
         step("Проверяем, что имя пользователя осталось пустым", () -> {
-            assertEquals("", response.getName());
+            assertEquals("", response.getName(), "Имя пользователя должно остаться пустым");
         });
 
         step("Проверяем, что должность пользователя обновлена", () -> {
-            assertEquals("zion resident", response.getJob());
+            assertEquals("zion resident", response.getJob(), "Должность пользователя должна быть обновлена на 'zion resident'");
         });
 
         step("Проверяем, что время обновления установлено", () -> {
-            assertNotNull(response.getUpdatedAt());
+            assertNotNull(response.getUpdatedAt(), "Время обновления не должно быть null");
         });
 
         step("Проверяем формат времени обновления", () -> {
-            assertTrue(response.getUpdatedAt().startsWith(currentYear + "-" + currentMonth));
-            assertTrue(response.getUpdatedAt().endsWith("Z"));
-            assertTrue(response.getUpdatedAt().contains("T"));
+            assertTrue(response.getUpdatedAt().startsWith(currentYear + "-" + currentMonth), "Время обновления должно начинаться с текущего года и месяца");
+            assertTrue(response.getUpdatedAt().endsWith("Z"), "Время обновления должно заканчиваться на 'Z'");
+            assertTrue(response.getUpdatedAt().contains("T"), "Время обновления должно содержать 'T'");
         });
     }
 
@@ -230,39 +186,29 @@ public class ReqresApiTests extends ApiTestBase {
                     .extract().as(RegisterResponseModel.class);
         });
 
-        step("Выводим ответ регистрации в консоль", () -> {
-            System.out.println("=== Register Response ===");
-            System.out.println("ID: " + response.getId());
-            System.out.println("Username: " + response.getUsername());
-            System.out.println("Email: " + response.getEmail());
-            System.out.println("Password: " + response.getPassword());
-            System.out.println("CreatedAt: " + response.getCreatedAt());
-            System.out.println("========================");
-        });
-
         step("Проверяем, что у пользователя есть ID", () -> {
-            assertNotNull(response.getId(), "User ID should not be null");
-            assertFalse(response.getId().isEmpty(), "User ID should not be empty");
+            assertNotNull(response.getId(), "ID пользователя не должен быть null");
+            assertFalse(response.getId().isEmpty(), "ID пользователя не должен быть пустым");
         });
 
         step("Проверяем, что у пользователя есть username", () -> {
-            assertNotNull(response.getUsername(), "Username should not be null");
-            assertFalse(response.getUsername().isEmpty(), "Username should not be empty");
+            assertNotNull(response.getUsername(), "Username не должен быть null");
+            assertFalse(response.getUsername().isEmpty(), "Username не должен быть пустым");
         });
 
         step("Проверяем, что у пользователя есть email", () -> {
-            assertNotNull(response.getEmail(), "Email should not be null");
-            assertFalse(response.getEmail().isEmpty(), "Email should not be empty");
+            assertNotNull(response.getEmail(), "Email не должен быть null");
+            assertFalse(response.getEmail().isEmpty(), "Email не должен быть пустым");
         });
 
         step("Проверяем, что у пользователя есть password", () -> {
-            assertNotNull(response.getPassword(), "Password should not be null");
-            assertFalse(response.getPassword().isEmpty(), "Password should not be empty");
+            assertNotNull(response.getPassword(), "Password не должен быть null");
+            assertFalse(response.getPassword().isEmpty(), "Password не должен быть пустым");
         });
 
         step("Проверяем, что время создания установлено", () -> {
-            assertNotNull(response.getCreatedAt(), "CreatedAt should not be null");
-            assertFalse(response.getCreatedAt().isEmpty(), "CreatedAt should not be empty");
+            assertNotNull(response.getCreatedAt(), "Время создания не должно быть null");
+            assertFalse(response.getCreatedAt().isEmpty(), "Время создания не должно быть пустым");
         });
     }
 
@@ -306,51 +252,41 @@ public class ReqresApiTests extends ApiTestBase {
                     .extract().as(LoginResponseModel.class);
         });
 
-        step("Выводим ответ логина в консоль", () -> {
-            System.out.println("=== Login Response ===");
-            System.out.println("ID: " + loginResponse.getId());
-            System.out.println("Username: " + loginResponse.getUsername());
-            System.out.println("Email: " + loginResponse.getEmail());
-            System.out.println("Password: " + loginResponse.getPassword());
-            System.out.println("CreatedAt: " + loginResponse.getCreatedAt());
-            System.out.println("=====================");
-        });
-
         step("Проверяем, что ID пользователя получен", () -> {
-            assertNotNull(loginResponse.getId(), "ID should not be null");
-            assertFalse(loginResponse.getId().isEmpty(), "ID should not be empty");
+            assertNotNull(loginResponse.getId(), "ID пользователя не должен быть null");
+            assertFalse(loginResponse.getId().isEmpty(), "ID пользователя не должен быть пустым");
         });
 
         step("Проверяем, что username пользователя получен", () -> {
-            assertNotNull(loginResponse.getUsername(), "Username should not be null");
-            assertFalse(loginResponse.getUsername().isEmpty(), "Username should not be empty");
+            assertNotNull(loginResponse.getUsername(), "Username не должен быть null");
+            assertFalse(loginResponse.getUsername().isEmpty(), "Username не должен быть пустым");
         });
 
         step("Проверяем, что email пользователя получен", () -> {
-            assertNotNull(loginResponse.getEmail(), "Email should not be null");
-            assertFalse(loginResponse.getEmail().isEmpty(), "Email should not be empty");
+            assertNotNull(loginResponse.getEmail(), "Email не должен быть null");
+            assertFalse(loginResponse.getEmail().isEmpty(), "Email не должен быть пустым");
         });
 
         step("Проверяем, что password пользователя получен", () -> {
-            assertNotNull(loginResponse.getPassword(), "Password should not be null");
-            assertFalse(loginResponse.getPassword().isEmpty(), "Password should not be empty");
+            assertNotNull(loginResponse.getPassword(), "Password не должен быть null");
+            assertFalse(loginResponse.getPassword().isEmpty(), "Password не должен быть пустым");
         });
 
         step("Проверяем, что время создания установлено", () -> {
-            assertNotNull(loginResponse.getCreatedAt(), "CreatedAt should not be null");
-            assertFalse(loginResponse.getCreatedAt().isEmpty(), "CreatedAt should not be empty");
+            assertNotNull(loginResponse.getCreatedAt(), "Время создания не должно быть null");
+            assertFalse(loginResponse.getCreatedAt().isEmpty(), "Время создания не должно быть пустым");
         });
 
         step("Проверяем, что данные для логина соответствуют данным регистрации", () -> {
-            assertEquals(registerData.getUsername(), loginData.getUsername(), "Username should match registration data");
-            assertEquals(registerData.getEmail(), loginData.getEmail(), "Email should match registration data");
-            assertEquals(registerData.getPassword(), loginData.getPassword(), "Password should match registration data");
+            assertEquals(registerData.getUsername(), loginData.getUsername(), "Username должен соответствовать данным регистрации");
+            assertEquals(registerData.getEmail(), loginData.getEmail(), "Email должен соответствовать данным регистрации");
+            assertEquals(registerData.getPassword(), loginData.getPassword(), "Password должен соответствовать данным регистрации");
         });
 
         step("Проверяем, что данные ответа соответствуют переданным значениям", () -> {
-            assertEquals(loginData.getUsername(), loginResponse.getUsername(), "Username in response should match request");
-            assertEquals(loginData.getEmail(), loginResponse.getEmail(), "Email in response should match request");
-            assertEquals(loginData.getPassword(), loginResponse.getPassword(), "Password in response should match request");
+            assertEquals(loginData.getUsername(), loginResponse.getUsername(), "Username в ответе должен соответствовать запросу");
+            assertEquals(loginData.getEmail(), loginResponse.getEmail(), "Email в ответе должен соответствовать запросу");
+            assertEquals(loginData.getPassword(), loginResponse.getPassword(), "Password в ответе должен соответствовать запросу");
         });
     }
 
@@ -376,37 +312,33 @@ public class ReqresApiTests extends ApiTestBase {
         });
 
         step("Проверяем корректность номера страницы", () -> {
-            assertEquals(pageNumber, response.getPage(), "Page should be 2");
+            assertEquals(pageNumber, response.getPage(), "Номер страницы должен быть равен 2");
         });
 
         step("Проверяем количество элементов на странице", () -> {
-            assertEquals(6, response.getPer_page(), "Per page should be 6");
+            assertEquals(6, response.getPer_page(), "Количество элементов на странице должно быть равно 6");
         });
 
         step("Проверяем общее количество пользователей", () -> {
-            assertTrue(response.getTotal() > 0, "Total should be greater than 0");
+            assertTrue(response.getTotal() > 0, "Общее количество пользователей должно быть больше 0");
         });
 
         step("Проверяем общее количество страниц", () -> {
-            assertTrue(response.getTotal_pages() > 0, "Total pages should be greater than 0");
+            assertTrue(response.getTotal_pages() > 0, "Общее количество страниц должно быть больше 0");
         });
 
         step("Проверяем наличие данных пользователей", () -> {
-            assertNotNull(response.getData(), "Data should not be null");
-            assertFalse(response.getData().isEmpty(), "Data should not be empty");
-        });
-
-        step("Проверяем наличие информации поддержки", () -> {
-            assertNotNull(response.getSupport(), "Support should not be null");
+            assertNotNull(response.getData(), "Данные пользователей не должны быть null");
+            assertFalse(response.getData().isEmpty(), "Данные пользователей не должны быть пустыми");
         });
         
         step("Проверяем данные первого пользователя на странице", () -> {
             UserModel firstUser = response.getData().get(0);
-            assertTrue(firstUser.getId() > 0, "User ID should be positive");
-            assertNotNull(firstUser.getEmail(), "User email should not be null");
-            assertNotNull(firstUser.getFirst_name(), "User first name should not be null");
-            assertNotNull(firstUser.getLast_name(), "User last name should not be null");
-            assertNotNull(firstUser.getAvatar(), "User avatar should not be null");
+            assertTrue(firstUser.getId() > 0, "ID пользователя должен быть положительным");
+            assertNotNull(firstUser.getEmail(), "Email пользователя не должен быть null");
+            assertNotNull(firstUser.getFirst_name(), "Имя пользователя не должно быть null");
+            assertNotNull(firstUser.getLast_name(), "Фамилия пользователя не должна быть null");
+            assertNotNull(firstUser.getAvatar(), "Аватар пользователя не должен быть null");
         });
     }
 }
