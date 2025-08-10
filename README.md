@@ -128,11 +128,11 @@ clean ${TASK}
 
 ### Главная страница Allure-отчета
 <!-- Вставьте скриншот главной страницы Allure-отчета -->
-<img src="images/screens/allure_report_main.png" width="800" alt="Allure Main Page">
+<img src="images/screens/allure1.png.png" width="800" alt="Allure Main Page">
 
 ### Пример отчета о выполнении тестов
 <!-- Вставьте скриншот с результатами выполнения тестов -->
-<img src="images/screens/allure_report_results.png" width="800" alt="Allure Test Results">
+<img src="images/screens/allure2" width="800" alt="Allure Test Results">
 
 ### Графики и статистика
 <!-- Вставьте скриншот с графиками выполнения тестов -->
