@@ -111,7 +111,7 @@
 ### Локальный запуск
 ```bash
 # Запуск всех API-тестов
-gradle clean all_api_test
+gradle clean test
 
 # Запуск тестов с тегом AutoRun
 gradle clean auto_tests_custom_run
