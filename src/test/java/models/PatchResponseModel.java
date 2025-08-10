@@ -1,11 +1,9 @@
-package models.lombok;
+package models;
 
 import lombok.Data;
 
 @Data
 public class PatchResponseModel extends ApiResponseModel {
-
-    String name;
-
-    String job;
+    private String name;
+    private String job;
 }

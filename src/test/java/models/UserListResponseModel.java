@@ -1,13 +1,9 @@
-package models.lombok;
+package models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import java.util.List;
-import models.lombok.UserModel;
-import models.lombok.SupportModel;
 
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserListResponseModel {
     private int page;
     private int per_page;
@@ -16,5 +12,3 @@ public class UserListResponseModel {
     private List<UserModel> data;
     private SupportModel support;
 }
-
-

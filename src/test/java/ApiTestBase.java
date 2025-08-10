@@ -5,7 +5,7 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
-public class TestBase {
+public class ApiTestBase {
     
     protected static final String BASE_URI = System.getProperty("base.uri", "https://reqres.in");
     protected static final String BASE_PATH = System.getProperty("base.path", "/api");
