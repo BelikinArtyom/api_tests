@@ -20,7 +20,7 @@ public class ReqresApiTests extends ApiTestBase {
     @Tag("Auto run")
     @DisplayName("PATCH: Обновление имени и должности пользователя")
     @Test
-    void shouldUpdateUserJobAndNameSuccessfully() {
+    void updateUserJobAndNameTest() {
 
         RequestBodyModel testData = RequestBodyModel.createPatchData();
         String currentYear = RequestBodyModel.getCurrentYear();
@@ -62,7 +62,7 @@ public class ReqresApiTests extends ApiTestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("GET: Получение объекта цвета с детальной информацией")
     @Test
-    void shouldRetrieveSingleColorObjectSuccessfully() {
+    void retrieveSingleColorObjectTest() {
 
         SingleGetResponseModel response = step("Отправляем запрос на получение объекта цвета", () -> {
             return given().spec(getRequestSpec)
@@ -105,7 +105,7 @@ public class ReqresApiTests extends ApiTestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("POST: Создание нового пользователя")
     @Test
-    void shouldCreateNewUserSuccessfully() {
+    void createNewUserTest() {
 
         RequestBodyModel testData = RequestBodyModel.createPostData();
         String currentYear = RequestBodyModel.getCurrentYear();
@@ -145,7 +145,7 @@ public class ReqresApiTests extends ApiTestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("GET: Обработка несуществующего пользователя")
     @Test
-    void shouldReturnEmptyResponseForNonExistingUser() {
+    void returnEmptyResponseForNonExistingUserTest() {
 
         SingleGetResponseModel response = step("Отправляем запрос на получение несуществующего пользователя", () -> {
             return given().spec(getRequestSpec)
@@ -172,7 +172,7 @@ public class ReqresApiTests extends ApiTestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("PATCH: Частичное обновление пользователя (только должность)")
     @Test
-    void shouldUpdateUserJobOnlySuccessfully() {
+    void updateUserJobOnlyTest() {
 
         RequestBodyModel testData = RequestBodyModel.createPatchSingle();
         String currentYear = RequestBodyModel.getCurrentYear();
@@ -214,7 +214,7 @@ public class ReqresApiTests extends ApiTestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("POST: Регистрация нового пользователя")
     @Test
-    void shouldRegisterNewUserSuccessfully() {
+    void registerNewUserTest() {
 
         RegisterRequestModel testData = RegisterRequestModel.createSuccessfulRegisterData();
 
@@ -257,7 +257,7 @@ public class ReqresApiTests extends ApiTestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("POST: Успешный вход пользователя в систему")
     @Test
-    void shouldLoginUserSuccessfully() {
+    void loginUserTest() {
 
         LoginRequestModel testData = LoginRequestModel.createSuccessfulLoginData();
 
@@ -308,7 +308,7 @@ public class ReqresApiTests extends ApiTestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("GET: Получение списка пользователей с пагинацией")
     @Test
-    void shouldRetrieveUserListWithPaginationSuccessfully() {
+    void retrieveUserListWithPaginationTest() {
 
         int pageNumber = 2;
 
