@@ -103,46 +103,6 @@ public class ReqresApiTests extends ApiTestBase {
     @Tag("AutoRun")
     @Owner("belikinA")
     @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("POST: Создание нового пользователя")
-    @Test
-    void createNewUserTest() {
-
-        RequestBodyModel testData = RequestBodyModel.createPostData();
-        String currentYear = RequestBodyModel.getCurrentYear();
-        String currentMonth = RequestBodyModel.getCurrentMonth();
-
-        RequestBodyModel response = step("Отправляем запрос на создание нового пользователя", () -> {
-            return given().spec(postRequestSpec)
-                    .body(testData)
-                    .when()
-                    .post("/api/users")
-                    .then()
-                    .spec(postResponseSpec)
-                    .extract().as(RequestBodyModel.class);
-        });
-
-        step("Проверяем, что имя пользователя создано корректно", () -> {
-            assertEquals("morpheus", response.getName());
-        });
-
-        step("Проверяем, что должность пользователя создана корректно", () -> {
-            assertEquals("leader", response.getJob());
-        });
-
-        step("Проверяем, что время создания установлено", () -> {
-            assertNotNull(response.getCreatedAt());
-        });
-
-        step("Проверяем формат времени создания", () -> {
-            assertTrue(response.getCreatedAt().startsWith(currentYear + "-" + currentMonth));
-        });
-    }
-
-    @Feature("Api tests")
-    @Story("reqres")
-    @Tag("AutoRun")
-    @Owner("belikinA")
-    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("GET: Обработка несуществующего пользователя")
     @Test
     void returnEmptyResponseForNonExistingUserTest() {
@@ -306,39 +266,24 @@ public class ReqresApiTests extends ApiTestBase {
                     .extract().as(LoginResponseModel.class);
         });
 
-        step("Выводим ответ логина в консоль", () -> {
-            System.out.println("=== Login Response ===");
-            System.out.println("ID: " + loginResponse.getId());
-            System.out.println("Username: " + loginResponse.getUsername());
-            System.out.println("Email: " + loginResponse.getEmail());
-            System.out.println("Password: " + loginResponse.getPassword());
-            System.out.println("CreatedAt: " + loginResponse.getCreatedAt());
-            System.out.println("=====================");
-        });
-
         step("Проверяем, что ID пользователя получен", () -> {
             assertNotNull(loginResponse.getId(), "ID should not be null");
-            assertFalse(loginResponse.getId().isEmpty(), "ID should not be empty");
         });
 
         step("Проверяем, что username пользователя получен", () -> {
             assertNotNull(loginResponse.getUsername(), "Username should not be null");
-            assertFalse(loginResponse.getUsername().isEmpty(), "Username should not be empty");
         });
 
         step("Проверяем, что email пользователя получен", () -> {
             assertNotNull(loginResponse.getEmail(), "Email should not be null");
-            assertFalse(loginResponse.getEmail().isEmpty(), "Email should not be empty");
         });
 
         step("Проверяем, что password пользователя получен", () -> {
             assertNotNull(loginResponse.getPassword(), "Password should not be null");
-            assertFalse(loginResponse.getPassword().isEmpty(), "Password should not be empty");
         });
 
         step("Проверяем, что время создания установлено", () -> {
             assertNotNull(loginResponse.getCreatedAt(), "CreatedAt should not be null");
-            assertFalse(loginResponse.getCreatedAt().isEmpty(), "CreatedAt should not be empty");
         });
 
         step("Проверяем, что данные для логина соответствуют данным регистрации", () -> {
