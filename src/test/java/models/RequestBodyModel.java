@@ -6,9 +6,6 @@ import lombok.Data;
 public class RequestBodyModel {
     private String name;
     private String job;
-    private String createdAt;
-    private String updatedAt;
-    private int id;
     
     public RequestBodyModel() {}
     
@@ -37,6 +34,4 @@ public class RequestBodyModel {
         model.setJob("leader");
         return model;
     }
-
-
 }

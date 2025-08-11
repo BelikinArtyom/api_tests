@@ -12,11 +12,6 @@ public class ApiSpecifications {
     
     private static final String API_KEY = System.getProperty("api.key", "reqres-free-v1");
 
-    public static RequestSpecification postRequestSpec = with()
-            .filter(withCustomTemplates())
-            .contentType("application/json")
-            .header("x-api-key", API_KEY);
-            
     public static RequestSpecification patchRequestSpec = with()
             .filter(withCustomTemplates())
             .contentType("application/json")
@@ -26,12 +21,12 @@ public class ApiSpecifications {
             .filter(withCustomTemplates())
             .contentType("application/json")
             .header("x-api-key", API_KEY);
+            
     public static RequestSpecification registerRequestSpec = with()
             .filter(withCustomTemplates())
-            .baseUri("https://reqres.in")
-            .basePath("/api")
             .header("x-api-key", API_KEY)
             .contentType(ContentType.JSON);
+            
     public static RequestSpecification getRequestSpec = with()
             .filter(withCustomTemplates())
             .contentType("application/json")
@@ -44,11 +39,6 @@ public class ApiSpecifications {
             
     public static ResponseSpecification patchResponseSpec = new ResponseSpecBuilder()
             .expectStatusCode(200)
-            .expectContentType(ContentType.JSON)
-            .build();
-            
-    public static ResponseSpecification postResponseSpec = new ResponseSpecBuilder()
-            .expectStatusCode(201)
             .expectContentType(ContentType.JSON)
             .build();
             
