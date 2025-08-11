@@ -20,7 +20,7 @@ public class ReqresApiTests extends ApiTestBase {
     @Test
     void updateUserJobAndNameTest() {
 
-        RequestBodyModel testData = RequestBodyModel.createPatchData();
+        RequestBodyModel testData = RequestBodyModel.create("morpheus", "zion resident");
 
         PatchResponseModel response = step("Подготавливаем тестовые данные для обновления пользователя", () -> {
             return given().spec(patchRequestSpec)
@@ -125,7 +125,7 @@ public class ReqresApiTests extends ApiTestBase {
     @Test
     void updateUserJobOnlyTest() {
 
-        RequestBodyModel testData = RequestBodyModel.createPatchSingle();
+        RequestBodyModel testData = RequestBodyModel.create("", "zion resident");
 
         PatchResponseModel response = step("Отправляем запрос на частичное обновление пользователя", () -> {
             return given().spec(patchRequestSpec)

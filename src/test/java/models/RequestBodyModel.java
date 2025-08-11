@@ -7,31 +7,10 @@ public class RequestBodyModel {
     private String name;
     private String job;
     
-    public RequestBodyModel() {}
-    
-    public RequestBodyModel(String name, String job) {
-        this.name = name;
-        this.job = job;
-    }
-    
-    public static RequestBodyModel createPatchData() {
+    public static RequestBodyModel create(String name, String job) {
         RequestBodyModel model = new RequestBodyModel();
-        model.setName("morpheus");
-        model.setJob("zion resident");
-        return model;
-    }
-
-    public static RequestBodyModel createPatchSingle() {
-        RequestBodyModel model = new RequestBodyModel();
-        model.setName("");
-        model.setJob("zion resident");
-        return model;
-    }
-    
-    public static RequestBodyModel createPostData() {
-        RequestBodyModel model = new RequestBodyModel();
-        model.setName("morpheus");
-        model.setJob("leader");
+        model.setName(name);
+        model.setJob(job);
         return model;
     }
 }
